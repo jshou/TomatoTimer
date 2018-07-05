@@ -30,13 +30,15 @@ class MainActivity : AppCompatActivity() {
 
     fun start(view: View) {
         timer.start()
-        startButton.isClickable = false
+        startButton.isEnabled = false
+        resetButton.isEnabled = true
         Toast.makeText(this, getString(R.string.start_message), Toast.LENGTH_SHORT).show()
     }
 
     fun reset(view: View) {
         timer.cancel()
-        startButton.isClickable = true
+        startButton.isEnabled = true
+        resetButton.isEnabled = false
         timerDisplay.text = formatTime(TOMATO_AMOUNT)
         Toast.makeText(this, getString(R.string.reset_message), Toast.LENGTH_SHORT).show()
     }
