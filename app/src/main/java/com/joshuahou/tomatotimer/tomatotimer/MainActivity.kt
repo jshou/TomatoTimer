@@ -10,11 +10,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.FileDescriptor
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        const val WORK_AMOUNT = (0.05 * 60 * 1000).toLong()
+        const val WORK_AMOUNT = (25 * 60 * 1000).toLong()
         const val REST_AMOUNT = (5 * 60 * 1000).toLong()
     }
 
