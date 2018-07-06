@@ -35,27 +35,29 @@ class MainActivity : AppCompatActivity() {
         audioPlayer.setAudioAttributes(attributes)
 
         setupAudio()
-        setupTimer(WORK_AMOUNT)
+        setupTimer(0)
     }
 
     fun cancel(view: View) {
         cancelButton.isEnabled = false
         resetWorkButton.isEnabled = true
         resetRestButton.isEnabled = true
+        mode.text = getString(R.string.smile)
+        timerDisplay.text = getString(R.string.zero)
         timer.cancel()
     }
 
     fun work(view: View) {
         reset(view)
         setupTimer(WORK_AMOUNT)
-        mode.text = "WORK"
+        mode.text = getString(R.string.work_mode)
         timer.start()
     }
 
     fun rest(view: View) {
         reset(view)
         setupTimer(REST_AMOUNT)
-        mode.text = "REST"
+        mode.text = getString(R.string.rest_mode)
         timer.start()
     }
 
