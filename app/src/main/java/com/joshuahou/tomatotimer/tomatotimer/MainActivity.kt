@@ -1,5 +1,6 @@
 package com.joshuahou.tomatotimer.tomatotimer
 
+import android.content.res.AssetFileDescriptor
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
@@ -19,13 +20,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var timer: CountDownTimer
     private lateinit var audioPlayer: MediaPlayer
-    private lateinit var beepFile: FileDescriptor
+    private lateinit var beepFile: AssetFileDescriptor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         volumeControlStream = AudioManager.STREAM_ALARM
-        beepFile = resources.openRawResourceFd(R.raw.beep).fileDescriptor
+        beepFile = assets.openFd("beep.mp3")
 
         audioPlayer = MediaPlayer()
         val attributes = AudioAttributes.Builder()
@@ -79,7 +80,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupAudio() {
-        audioPlayer.setDataSource(beepFile)
+        audioPlayer.setDataSource(beepFile.fileDescriptor, beepFile.startOffset, beepFile.length)
         audioPlayer.prepare()
     }
 
