@@ -13,20 +13,11 @@ import java.io.FileDescriptor
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        const val TOMATO_AMOUNT = (0.05 * 60 * 1000).toLong()
-        const val REST_AMOUNT = 5 * 60 * 1000
+        const val WORK_AMOUNT = (0.05 * 60 * 1000).toLong()
+        const val REST_AMOUNT = (5 * 60 * 1000).toLong()
     }
 
-    private var timer: CountDownTimer = object: CountDownTimer(TOMATO_AMOUNT, 1000) {
-        override fun onFinish() {
-            onTimerFinish()
-        }
-
-        override fun onTick(millisUntilFinished: Long) {
-            timerDisplay.text = formatTime(millisUntilFinished)
-        }
-    }
-
+    private lateinit var timer: CountDownTimer
     private lateinit var audioPlayer: MediaPlayer
     private lateinit var beepFile: FileDescriptor
 
@@ -42,23 +33,44 @@ class MainActivity : AppCompatActivity() {
                 .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
                 .build()
         audioPlayer.setAudioAttributes(attributes)
+
         setupAudio()
+        setupTimer(WORK_AMOUNT)
     }
 
     fun start(view: View) {
         timer.start()
         startButton.isEnabled = false
-        resetButton.isEnabled = true
         Toast.makeText(this, getString(R.string.start_message), Toast.LENGTH_SHORT).show()
     }
 
-    fun reset(view: View) {
+    fun resetWork(view: View) {
+        reset(view)
+        setupTimer(WORK_AMOUNT)
+    }
+
+    fun resetRest(view: View) {
+        reset(view)
+        setupTimer(REST_AMOUNT)
+    }
+
+    private fun reset(view: View) {
         timer.cancel()
         startButton.isEnabled = true
-        resetButton.isEnabled = false
-        timerDisplay.text = formatTime(TOMATO_AMOUNT)
         resetAudio()
-        Toast.makeText(this, getString(R.string.reset_message), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupTimer(amount: Long) {
+        timer = object: CountDownTimer(amount, 500) {
+            override fun onFinish() {
+                onTimerFinish()
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                timerDisplay.text = formatTime(millisUntilFinished)
+            }
+        }
+        timerDisplay.text = formatTime(amount)
     }
 
     fun onTimerFinish() {

@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">TomatoTimer</string>
     <string name="start_stop">Start</string>
-    <string name="reset">Reset</string>
-    <string name="reset_message">Resetting timer</string>
+    <string name="resetWork">Work</string>
+    <string name="resetRest">Rest</string>
     <string name="start_message">Starting timer</string>
     <string name="finished_timer_message">Finished</string>
 </resources>

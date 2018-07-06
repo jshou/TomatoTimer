@@ -36,13 +36,20 @@
             android:text="@string/start_stop" />
 
         <Button
-            android:id="@+id/resetButton"
+            android:id="@+id/resetWorkButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="reset"
-            android:enabled="false"
-            android:text="@string/reset" />
+            android:onClick="resetWork"
+            android:text="@string/resetWork" />
+
+        <Button
+            android:id="@+id/resetRestButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="resetRest"
+            android:text="@string/resetRest" />
     </LinearLayout>
 
 </LinearLayout>
