@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun cancel(view: View) {
+        resetDisplay()
+    }
+
+    private fun resetDisplay() {
         cancelButton.visibility = View.GONE
         workButtons.visibility = View.VISIBLE
         mode.text = getString(R.string.smile)
@@ -48,15 +52,15 @@ class MainActivity : AppCompatActivity() {
 
     fun work(view: View) {
         reset(view)
-        setupTimer(WORK_AMOUNT)
         mode.text = getString(R.string.work_mode)
+        setupTimer(WORK_AMOUNT)
         timer.start()
     }
 
     fun rest(view: View) {
         reset(view)
-        setupTimer(REST_AMOUNT)
         mode.text = getString(R.string.rest_mode)
+        setupTimer(REST_AMOUNT)
         timer.start()
     }
 
@@ -84,6 +88,7 @@ class MainActivity : AppCompatActivity() {
     fun onTimerFinish() {
         Toast.makeText(this, getString(R.string.finished_timer_message), Toast.LENGTH_SHORT).show()
         audioPlayer.start()
+        resetDisplay()
     }
 
     private fun setupAudio() {
