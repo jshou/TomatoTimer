@@ -38,27 +38,33 @@ class MainActivity : AppCompatActivity() {
         setupTimer(WORK_AMOUNT)
     }
 
-    fun start(view: View) {
-        timer.start()
-        startButton.isEnabled = false
-        Toast.makeText(this, getString(R.string.start_message), Toast.LENGTH_SHORT).show()
+    fun cancel(view: View) {
+        cancelButton.isEnabled = false
+        resetWorkButton.isEnabled = true
+        resetRestButton.isEnabled = true
+        timer.cancel()
     }
 
     fun resetWork(view: View) {
         reset(view)
         setupTimer(WORK_AMOUNT)
+        timer.start()
     }
 
     fun resetRest(view: View) {
         reset(view)
         setupTimer(REST_AMOUNT)
+        timer.start()
     }
 
     private fun reset(view: View) {
+        cancelButton.isEnabled = true
+        resetWorkButton.isEnabled = false
+        resetRestButton.isEnabled = false
         timer.cancel()
-        startButton.isEnabled = true
         resetAudio()
     }
+
 
     private fun setupTimer(amount: Long) {
         timer = object: CountDownTimer(amount, 500) {
