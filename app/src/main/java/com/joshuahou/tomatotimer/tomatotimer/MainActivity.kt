@@ -39,9 +39,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun cancel(view: View) {
-        cancelButton.isEnabled = false
-        resetWorkButton.isEnabled = true
-        resetRestButton.isEnabled = true
+        cancelButton.visibility = View.GONE
+        workButtons.visibility = View.VISIBLE
         mode.text = getString(R.string.smile)
         timerDisplay.text = getString(R.string.zero)
         timer.cancel()
@@ -62,9 +61,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun reset(view: View) {
-        cancelButton.isEnabled = true
-        resetWorkButton.isEnabled = false
-        resetRestButton.isEnabled = false
+        cancelButton.visibility = View.VISIBLE
+        workButtons.visibility = View.GONE
         timer.cancel()
         resetAudio()
     }
