@@ -9,6 +9,15 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/smile"
+        android:textStyle="bold"
+        android:textSize="110sp"/>
+
+    <TextView
         android:id="@+id/timerDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,16 +54,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="resetWork"
-            android:text="@string/resetWork" />
+            android:onClick="work"
+            android:text="@string/workLabel" />
 
         <Button
             android:id="@+id/resetRestButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="resetRest"
-            android:text="@string/resetRest" />
+            android:onClick="rest"
+            android:text="@string/restLabel" />
     </LinearLayout>
 
 </LinearLayout>

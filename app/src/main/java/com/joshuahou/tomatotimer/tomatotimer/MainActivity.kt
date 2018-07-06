@@ -45,15 +45,17 @@ class MainActivity : AppCompatActivity() {
         timer.cancel()
     }
 
-    fun resetWork(view: View) {
+    fun work(view: View) {
         reset(view)
         setupTimer(WORK_AMOUNT)
+        mode.text = "WORK"
         timer.start()
     }
 
-    fun resetRest(view: View) {
+    fun rest(view: View) {
         reset(view)
         setupTimer(REST_AMOUNT)
+        mode.text = "REST"
         timer.start()
     }
 
