@@ -1,11 +1,15 @@
 package com.joshuahou.tomatotimer.tomatotimer
 
+import android.app.Notification
+import android.app.NotificationManager
+import android.content.Context
 import android.content.res.AssetFileDescriptor
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.support.v4.app.NotificationCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
@@ -15,11 +19,13 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val WORK_AMOUNT = (25 * 60 * 1000).toLong()
         const val REST_AMOUNT = (5 * 60 * 1000).toLong()
+        const val NOTIFICATION_ID = 124534523
     }
 
     private lateinit var timer: CountDownTimer
     private lateinit var audioPlayer: MediaPlayer
     private lateinit var beepFile: AssetFileDescriptor
+    private lateinit var notificationManager: NotificationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +39,8 @@ class MainActivity : AppCompatActivity() {
                 .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
                 .build()
         audioPlayer.setAudioAttributes(attributes)
+
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         setupAudio()
         setupTimer(0)
@@ -48,6 +56,8 @@ class MainActivity : AppCompatActivity() {
         mode.text = getString(R.string.smile)
         timerDisplay.text = getString(R.string.zero)
         timer.cancel()
+        notificationManager.cancel(NOTIFICATION_ID)
+
     }
 
     fun work(view: View) {
@@ -69,8 +79,17 @@ class MainActivity : AppCompatActivity() {
         workButtons.visibility = View.GONE
         timer.cancel()
         resetAudio()
-    }
 
+        val notification = Notification.Builder(this)
+                .setSmallIcon(R.drawable.notification_icon)
+                .setContentTitle("TomatoTimer")
+                .setContentText("TomatoTimer is running")
+                .setAutoCancel(false)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .build()
+
+        notificationManager.notify(NOTIFICATION_ID, notification)
+    }
 
     private fun setupTimer(amount: Long) {
         timer = object: CountDownTimer(amount, 500) {
