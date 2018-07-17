@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                 .setContentTitle("TomatoTimer")
                 .setContentText("TomatoTimer is running")
                 .setAutoCancel(false)
+                .setOngoing(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .build()
 
